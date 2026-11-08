@@ -72,13 +72,22 @@
         }
         a { color: var(--link); text-decoration: none; }
         a:hover { text-decoration: underline; }
+        .email-button {
+            font: inherit;
+            color: var(--link);
+            background: none;
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 6px 14px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <h1>StrongFive Food Support</h1>
     <p class="updated">Last updated: November 8, 2026</p>
 
-    <p class="summary">Questions, a bug, or a food with the wrong numbers? Email <a href="mailto:support@icedigital.co?subject=StrongFive%20Food">support@icedigital.co</a>. In the app, Settings → Contact Support opens a message with your app version filled in. On your Home Screen the app is called <strong>5 Food</strong>.</p>
+    <p class="summary">Questions, a bug, or a food with the wrong numbers? Email us (see Contact below). In the app, Settings → Contact Support opens a message with your app version filled in. On your Home Screen the app is called <strong>5 Food</strong>.</p>
 
     <h2>Getting started</h2>
     <ul>
@@ -132,8 +141,21 @@
 
     <div class="contact">
         <h2>Contact</h2>
-        <p>Email <a href="mailto:support@icedigital.co?subject=StrongFive%20Food">support@icedigital.co</a>. Please include your iPhone model and iOS version, and the app version from Settings → About.</p>
+        <p><button class="email-button" type="button" onclick="showEmail(this)">Show email address</button><noscript>support (at) icedigital (dot) co</noscript></p>
+        <p>Please include your iPhone model and iOS version, and the app version from Settings → About.</p>
         <p>StrongFive Food is made by Ice Digital.</p>
     </div>
+    <script>
+        // The address is put together only when someone taps the button, so it
+        // never appears in the page for address-harvesting bots.
+        function showEmail(button) {
+            var parts = ["support", "icedigital", "co"];
+            var address = parts[0] + "\u0040" + parts[1] + "." + parts[2];
+            var link = document.createElement("a");
+            link.href = "mail" + "to:" + address + "?subject=" + encodeURIComponent("StrongFive Food");
+            link.textContent = address;
+            button.replaceWith(link);
+        }
+    </script>
 </body>
 </html>
